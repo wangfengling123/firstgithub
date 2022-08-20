@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>前后端交互</div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        console.log(typeof Promise);
+        console.dir(Promise)
+        new Promise(function(resolve,reject){
+            //成功时调用resolve()
+            //失败时调用reject ()
+            setTimeout(() => {
+                let flag=false
+                if(flag){
+                    resolve('hello')
+                }else{
+                    reject('出错了')
+                }
+            }, 1000);
+        })
+        .then(function(data){
+            //从resolve得到正常结果
+            console.log(data)
+        },function(info){
+            //从reject得到错误信息
+            console.log(info)
+        })
+        
+        // 前后端交互，异步编程与Promise概述
+        // $.ajax({
+        //     url:'',
+        //     success:function(data){
+        //         console.log(data)
+        //     }
+        // })
+    </script>
+</body>
+</html>

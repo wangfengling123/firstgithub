@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function queryData(url){
+            return new Promise(function(resolve,reject){
+                let xhr=new XMLHttpRequest()
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState !=4) return
+                    if(xhr.status ===200){
+                        resolve(xhr.responseText)
+                    }else{
+                        reject('服务器错误')
+                    }
+                }
+                xhr.open('get',url)
+                xhr.send(null)
+            })
+        }
+        
+        let p1=queryData('http://localhost:3001/a1')
+        let p2=queryData('http://localhost:3001/a2')
+        let p3=queryData('http://localhost:3001/a3')
+        // Promise.all([p1,p2,p3]).then(result=>{
+        //     console.log(result);
+        // })
+        Promise.race([p1,p2,p3]).then(result=>{
+            console.log(result);
+        })
+    </script>
+</body>
+</html>
